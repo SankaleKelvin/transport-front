@@ -38,8 +38,8 @@
                                                 :rules="inputRules"></v-text-field>
                                             <v-text-field v-model="editedItem.truck_id" label="Truck Id"
                                                 :rules="inputRules"></v-text-field>
-                                            <v-select v-model="editedItem.designation_id" label="Truck Designation"
-                                                :items="designationItem"></v-select>
+                                            <v-select v-model="editedItem.driver_id" label="Driver"
+                                                :items="driverItem"></v-select>
                                             <v-file-input v-model="image" label="Upload Image" show-size counter="1"
                                                 accept="image/*"></v-file-input>
                                             <v-img v-if="filePreview" :src="filePreview" alt="Selected Image" width="200"
@@ -75,7 +75,7 @@
                 <v-img :src="getImageUrl(item.image_path)" alt="Truck Image" width="50" height="50"></v-img>
             </template>
             <template v-slot:[`item.actions`]="{ item }">
-                <v-icon size="small" class="me-2" @click="editItem(item.key)">
+                <v-icon size="small" class="me-2" @click="editItem(item.driver_id)">
                     mdi-pencil
                 </v-icon>
                 <v-icon size="small" @click="deleteItem(item.key)">
@@ -130,8 +130,8 @@ export default {
             console.log("Image path is:", imagePath);
             return imagePath ? `http://127.0.0.1:8000/storage/${imagePath}` : null;
         };
-        const designationItem = computed(() => {
-            return driversStore.drivers.map(designation => (designation.name));
+        const driverItem = computed(() => {
+            return driversStore.drivers.map(driver => (driver.name));
         });
 
         const editedItem = computed(() => trucksStore.editedItem);
@@ -141,22 +141,22 @@ export default {
         const dialogDelete = computed(() => trucksStore.dialogDelete);
 
         async function save() {
-            const selectedDesignationName = editedItem.value.designation_id;
-            const selectedDesignation = driversStore.drivers.find(designation => designation.name === selectedDesignationName);
+            const selectedDriverName = editedItem.value.driver_id;
+            const selectedDriver = driversStore.drivers.find(driver => driver.name === selectedDriverName);
 
-            if (!selectedDesignation) {
-                console.error('Selected designation not found.');
+            if (!selectedDriver) {
+                console.error('Selected driver not found.');
                 return;
             }
 
-            trucksStore.editedItem.designation_id = selectedDesignation.id;
+            trucksStore.editedItem.driver_id = selectedDriver.id;
 
             // Create FormData
             const formData = new FormData();
             // formData.append('id', editedItem.value.id);
             formData.append('name', editedItem.value.name);
             formData.append('truck_id', editedItem.value.truck_id);
-            formData.append('designation_id', trucksStore.editedItem.designation_id);
+            formData.append('driver_id', trucksStore.editedItem.driver_id);
 
             // Check if file is selected
             if (image.value) {
@@ -193,6 +193,7 @@ export default {
 
 
         function editItem(id) {
+            console.log("edit number ", id);
             trucksStore.editItem(id);
         }
 
@@ -232,7 +233,7 @@ export default {
         onMounted(() => {
             trucksStore.fetchTrucks();
             driversStore.fetchDrivers();
-            console.log("Designation items:", designationItem.value);
+            console.log("Driver items:", driverItem.value);
         });
 
         return {
@@ -255,7 +256,7 @@ export default {
             closeDelete,
             initialize,
             save,
-            designationItem,
+            driverItem,
             filePreview,
             getImageUrl,
             image,
