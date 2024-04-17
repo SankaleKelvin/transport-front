@@ -1,5 +1,5 @@
 <template>
-    <v-footer dark padless app inset v-if="shouldShowFooter">
+    <v-footer dark padless app inset ><!-- v-if="shouldShowFooter"> -->
         <v-card class="flex w-100" flat tile :color="computedColor" :elevation="10">
 
             <v-card-text class="py-2 white--text text-center">

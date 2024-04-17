@@ -34,11 +34,11 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="12" md="12">
-                                            <v-text-field v-model="editedItem.name" label="Truck name"
+                                            <v-text-field v-model="editedItem.truck_name" label="Truck name"
                                                 :rules="inputRules"></v-text-field>
                                             <v-text-field v-model="editedItem.truck_id" label="Truck Id"
                                                 :rules="inputRules"></v-text-field>
-                                            <v-select v-model="editedItem.driver_id" label="Driver"
+                                            <v-select v-model="editedItem.driver_name" label="Driver"
                                                 :items="driverItem"></v-select>
                                             <v-file-input v-model="image" label="Upload Image" show-size counter="1"
                                                 accept="image/*"></v-file-input>
@@ -112,7 +112,7 @@ export default {
         const headers = [
             { title: 'ID', key: 'id', align: 'start' },
             { title: 'Truck Name', align: 'start', sortable: true, key: 'truck_name' },
-            { title: 'Driver', align: 'start', sortable: true, key: 'driver_id' },
+            { title: 'Driver', align: 'start', sortable: true, key: 'driver_name' },
             { title: 'Image', align: 'start', sortable: false, key: 'image_path' },
             { title: 'Actions', sortable: false, key: 'actions' },
         ];

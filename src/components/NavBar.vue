@@ -1,6 +1,6 @@
 <template>
     <!-- <v-navigation-drawer v-model="drawer" color="blue" dark app class="red darken-4"> -->
-    <v-navigation-drawer v-model="drawer" :color="computedColor" dark app class="red darken-4" v-if="shouldShowFooter">
+    <v-navigation-drawer v-model="drawer" :color="computedColor" dark app class="red darken-4"><!-- v-if="shouldShowFooter"> -->
       <v-layout column align-center>
         <v-flex class="my-2 mx-auto text-center">
           <v-avatar size="100">
@@ -47,20 +47,16 @@
   </template>
 
   <script>
-//   import { useColorsStore } from '@/store/colors';
+  // import { useColorsStore } from '@/stores/colors';
 
   export default {
     data: () => ({
       drawer: true,
       authenticated: false, // Initially, the user is not authenticated
       links: [
-        { icon: 'mdi-folder', text: 'Deserts', route: '/deserts' },
+        // { icon: 'mdi-folder', text: 'Home', route: '/deserts' },
         { icon: 'mdi-home', text: 'Home', route: '/' },
-        { icon: 'mdi-account-card', text: 'Designation', route: '/designation' },
-        { icon: 'mdi-progress-wrench', text: 'Statuses', route: '/statuses' },
-        { icon: 'mdi-briefcase', text: 'Projects', route: '/projects' },
-        { icon: 'mdi-clipboard-text', text: 'Assignments', route: '/assignments' },
-        { icon: 'mdi-upload', text: 'imageUpload', route: '/upload' },
+        { icon: 'mdi-account-card', text: 'Trucks', route: '/trucks' },
       ],
     }),
     methods: {
@@ -73,7 +69,7 @@
     computed: {
       computedColor(){
         // const navColor = useColorsStore();
-        return "";
+        return "blue";
       },
 
         shouldShowFooter(){
